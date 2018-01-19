@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 export class BookService extends DataService {
 
   constructor(http: HttpClient) {
-    super('myUrl', http);
+    super('myUrlFrom', http);
   }
 
 }
