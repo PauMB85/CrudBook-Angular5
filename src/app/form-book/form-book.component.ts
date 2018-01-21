@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-form-book',
@@ -10,9 +10,15 @@ export class FormBookComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(fb: FormBuilder) {
-    this.form = fb.group({
-      book: fb.group({
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
+
+  ngOnInit() { }
+
+  createForm() {
+    this.form = this.fb.group({
+      book: this.fb.group({
         author: ['', [Validators.required]],
         title: ['', [Validators.required]],
         editorial: ['', [Validators.required]]
@@ -20,7 +26,12 @@ export class FormBookComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  addBook() {
+    console.log(this.form);
+    console.log(this.book.value);
+    console.log('author: ' + this.author.value);
+  }
+
 
   get book() {
     return this.form.get('book');
@@ -37,12 +48,4 @@ export class FormBookComponent implements OnInit {
   get editorial() {
     return this.form.get('book.editorial');
   }
-
-  login() {
-    console.log(this.form);
-    console.log(this.book.value);
-    console.log('author: ' + this.author.value);
-  }
-
-
 }
