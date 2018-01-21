@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class FormBookComponent implements OnInit {
 
-  form: FormGroup;
+  formBook: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -17,7 +17,7 @@ export class FormBookComponent implements OnInit {
   ngOnInit() { }
 
   createForm() {
-    this.form = this.fb.group({
+    this.formBook = this.fb.group({
       book: this.fb.group({
         author: ['', [Validators.required]],
         title: ['', [Validators.required]],
@@ -27,25 +27,25 @@ export class FormBookComponent implements OnInit {
   }
 
   addBook() {
-    console.log(this.form);
+    console.log(this.formBook);
     console.log(this.book.value);
     console.log('author: ' + this.author.value);
   }
 
 
   get book() {
-    return this.form.get('book');
+    return this.formBook.get('book');
   }
 
   get author() {
-    return this.form.get('book.author');
+    return this.formBook.get('book.author');
   }
 
   get title() {
-    return this.form.get('book.title');
+    return this.formBook.get('book.title');
   }
 
   get editorial() {
-    return this.form.get('book.editorial');
+    return this.formBook.get('book.editorial');
   }
 }
