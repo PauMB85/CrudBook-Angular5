@@ -1,0 +1,13 @@
+<div *ngIf="bookList.length==0;else there_are_books">
+  There aren't books ...
+</div>
+
+<ng-template #there_are_books>
+<ul class="list-group" *ngFor="let book of bookList">
+  <li class="list-group-item">
+    <span>{{book.title}} - {{book.author}}</span>
+    <button class="btn btn-primary" (submit)="updateBook(book.idBook)">Update</button>
+    <button class="btn btn-danger" (submit)="deleteBook(book.idBook)">Delete</button>
+  </li>
+</ul>
+</ng-template>
