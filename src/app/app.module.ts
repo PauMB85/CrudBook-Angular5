@@ -7,19 +7,29 @@ import { AppComponent } from './app.component';
 import {BookService} from './services/book/book.service';
 import {HttpClientModule} from '@angular/common/http';
 import {AppErrorHandler} from './commons/errors/app-error-handler';
-import { FormBookComponent } from './form-book/form-book.component';
+import { FormBookComponent } from './components/form-book/form-book.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import {AppRoutingModule} from './app-routing.module';
+import {NotFoundComponent} from './components/notfound/notfound.component';
+import { ListAllBooksComponent } from './components/list-all-books/list-all-books.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormBookComponent
+    FormBookComponent,
+    NavbarComponent,
+    HomeComponent,
+    NotFoundComponent,
+    ListAllBooksComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [
     BookService,
