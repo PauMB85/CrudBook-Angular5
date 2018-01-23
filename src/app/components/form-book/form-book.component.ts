@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {BookService} from '../../services/book/book.service';
+import {Book} from '../../model/book';
+import {AppError} from '../../commons/errors/app-error';
 
 @Component({
   selector: 'app-form-book',
@@ -11,7 +14,7 @@ export class FormBookComponent implements OnInit {
 
   formBook: FormGroup;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private bookService: BookService) {
     this.createForm();
   }
 
@@ -28,9 +31,14 @@ export class FormBookComponent implements OnInit {
   }
 
   addBook() {
-    console.log(this.formBook);
     console.log(this.book.value);
-    console.log('author: ' + this.author.value);
+    const book: Book = this.book.value;
+    this.bookService.create(book)
+      .subscribe(newBook => {
+        console.log('Create a new book ' + newBook);
+      }, (error: AppError) => {
+        console.log('Error when create the new book');
+      });
   }
 
 
