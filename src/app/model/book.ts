@@ -1,14 +1,14 @@
 export class Book {
 
-  constructor(private _idBook: String, private _author: String, private _title: String, private _editorial: String) {
+  constructor(private _id: number, private _author: String, private _title: String, private _editorial: String) {
   }
 
-  get idBook(): String {
-    return this._idBook;
+  get id(): number {
+    return this._id;
   }
 
-  set idBook(value: String) {
-    this._idBook = value;
+  set id(value: number) {
+    this._id = value;
   }
   get author(): String {
     return this._author;

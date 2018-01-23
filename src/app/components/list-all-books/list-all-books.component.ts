@@ -13,20 +13,26 @@ export class ListAllBooksComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   ngOnInit() {
-    this.bookService.getAll()
-      .subscribe(listBooks => {
-        console.log('the book list is: ' + listBooks);
-        this.bookList = listBooks;
-        console.log('size list book: ' + this.bookList.length);
+    this.getAllBooks();
+  }
+
+  deleteBook(id: number) {
+    console.log('The book delete is: ' + id);
+    this.bookService.delete(id)
+      .subscribe(() => {
+        this.getAllBooks();
       });
   }
 
-  deleteBook(id: String) {
-    console.log('The book delete is: ' + id);
+  updateBook(id: number) {
+    console.log('The book update is: ' + id);
   }
 
-  updateBook(id: String) {
-    console.log('The book update is: ' + id);
+  private getAllBooks() {
+    this.bookService.getAll()
+      .subscribe(listBooks => {
+        this.bookList = listBooks;
+      });
   }
 
 }

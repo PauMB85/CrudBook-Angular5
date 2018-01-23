@@ -21,7 +21,7 @@ export class DataService {
   }
 
   get(id) {
-    return this.http.get(this.url + '/' + id, {observe: 'response'})
+    return this.http.get(this.url + id, {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
@@ -33,13 +33,13 @@ export class DataService {
   }
 
   update(resource) {
-    return this.http.put(this.url + '/' + resource.id, JSON.stringify(resource), {observe: 'response'})
+    return this.http.put(this.url + resource.id, JSON.stringify(resource), {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
 
   delete(id) {
-    return this.http.delete(this.url + '/' + id, {observe: 'response'})
+    return this.http.delete(this.url + id, {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
