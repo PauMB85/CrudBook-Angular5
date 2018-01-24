@@ -13,6 +13,8 @@ import { HomeComponent } from './components/home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {NotFoundComponent} from './components/notfound/notfound.component';
 import { ListAllBooksComponent } from './components/list-all-books/list-all-books.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
+import { UpdateBookComponent } from './components/update-book/update-book.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ListAllBooksComponent } from './components/list-all-books/list-all-book
     NavbarComponent,
     HomeComponent,
     NotFoundComponent,
-    ListAllBooksComponent
+    ListAllBooksComponent,
+    AddBookComponent,
+    UpdateBookComponent
   ],
   imports: [
     BrowserModule,

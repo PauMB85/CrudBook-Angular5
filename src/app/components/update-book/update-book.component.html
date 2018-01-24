@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-4">
+    <h2>{{titleForm}}</h2>
+    <hr>
+  </div>
+</div>
+<div *ngIf="book != null; else waitServe">
+  <app-form-book [bookI]="book" (addup)="onClickSubmit($event)"></app-form-book>
+</div>
+<ng-template #waitServe>
+  waiting to the server ....
+</ng-template>
+
