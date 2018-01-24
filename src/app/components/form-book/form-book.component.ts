@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BookService} from '../../services/book/book.service';
+import {Book} from '../../model/book';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-form-book',
@@ -10,29 +12,29 @@ import {BookService} from '../../services/book/book.service';
 })
 export class FormBookComponent implements OnInit {
 
+  @Input('bookI') bookI: any = new Observable();
+  @Output('addup') addup = new EventEmitter<Book>();
   formBook: FormGroup;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private bookService: BookService, private navigation: Router) {
+  }
+
+  ngOnInit() {
     this.createForm();
   }
 
-  ngOnInit() { }
-
+  submitForm() {
+    this.addup.emit(this.book.value);
+  }
   createForm() {
     this.formBook = this.fb.group({
       book: this.fb.group({
-        author: ['', [Validators.required]],
-        title: ['', [Validators.required]],
-        editorial: ['', [Validators.required]]
+        author: [this.bookI == null ? '' : this.bookI.author, [Validators.required]],
+        title: [this.bookI == null ? '' : this.bookI.title, [Validators.required]],
+        editorial: [this.bookI == null ? '' : this.bookI.editorial, [Validators.required]],
+        id: [this.bookI == null ? '' : this.bookI.id],
       })
     });
-  }
-
-  addBook() {
-    this.bookService.create(this.book.value)
-      .subscribe(() => {
-        this.navigation.navigate(['/listBooks']);
-      });
   }
 
   get book() {
