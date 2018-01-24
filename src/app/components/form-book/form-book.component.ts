@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BookService} from '../../services/book/book.service';
 
 @Component({
   selector: 'app-form-book',
@@ -10,7 +12,7 @@ export class FormBookComponent implements OnInit {
 
   formBook: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private bookService: BookService, private navigation: Router) {
     this.createForm();
   }
 
@@ -27,11 +29,11 @@ export class FormBookComponent implements OnInit {
   }
 
   addBook() {
-    console.log(this.formBook);
-    console.log(this.book.value);
-    console.log('author: ' + this.author.value);
+    this.bookService.create(this.book.value)
+      .subscribe(() => {
+        this.navigation.navigate(['/listBooks']);
+      });
   }
-
 
   get book() {
     return this.formBook.get('book');
