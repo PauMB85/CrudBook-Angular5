@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-4">
+    <h2>List of Books</h2>
+    <hr>
+    <div *ngIf="bookList.length==0;else there_are_books">
+      There aren't books ...
+    </div>
+
+    <ng-template #there_are_books>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody class="list-group" *ngFor="let book of bookList">
+        <tr>
+          <td>{{book.title}}</td>
+          <td>{{book.author}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="updateBook(book.id)">Update</button>
+            <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </div>
+</div>
+

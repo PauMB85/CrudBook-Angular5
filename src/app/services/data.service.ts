@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/throw';
 import {BadInputError} from '../commons/errors/bad-input-error';
 import {NotFoundError} from '../commons/errors/not-found-error';
@@ -11,34 +12,35 @@ import {AppError} from '../commons/errors/app-error';
 @Injectable()
 export class DataService {
 
-  constructor(private url: string, private http: HttpClient) { }
+  constructor(private url: string, private http: HttpClient) {
+  }
 
   getAll() {
-    return this.http.get(this.url, {observe: 'response'})
+    return this.http.get(this.url,  {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
 
   get(id) {
-    return this.http.get(this.url + '/' + id, {observe: 'response'})
+    return this.http.get(this.url + id, {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
 
   create(resource) {
-    return this.http.post(this.url, JSON.stringify(resource), {observe: 'response'})
+    return this.http.post(this.url, resource, {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
 
   update(resource) {
-    return this.http.put(this.url + '/' + resource.id, JSON.stringify(resource), {observe: 'response'})
+    return this.http.put(this.url + resource.id, resource, {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
 
   delete(id) {
-    return this.http.delete(this.url + '/' + id, {observe: 'response'})
+    return this.http.delete(this.url + id, {observe: 'response'})
       .map(response => response.body)
       .catch(this.handlerError);
   }
