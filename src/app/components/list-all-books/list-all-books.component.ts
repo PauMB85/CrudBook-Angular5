@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BookService} from '../../services/book/book.service';
 import {Book} from '../../model/book';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-all-books',
@@ -10,14 +11,13 @@ import {Book} from '../../model/book';
 export class ListAllBooksComponent implements OnInit {
 
   bookList: Array<Book> = [];
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit() {
     this.getAllBooks();
   }
 
   deleteBook(id: number) {
-    console.log('The book delete is: ' + id);
     this.bookService.delete(id)
       .subscribe(() => {
         this.getAllBooks();
@@ -25,7 +25,7 @@ export class ListAllBooksComponent implements OnInit {
   }
 
   updateBook(id: number) {
-    console.log('The book update is: ' + id);
+    this.router.navigate(['/updateBook', id]);
   }
 
   private getAllBooks() {
