@@ -4,5 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  endpoints: {
+    cxf_serve: 'http://localhost:8090/services/rest/book/'
+  }
 };
