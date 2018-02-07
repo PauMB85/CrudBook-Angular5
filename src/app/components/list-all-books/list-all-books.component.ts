@@ -17,14 +17,16 @@ export class ListAllBooksComponent implements OnInit {
     this.getAllBooks();
   }
 
-  deleteBook(id: number) {
+  deleteBook(id: String) {
+    const index = this.bookList.findIndex(x => x.id === id);
+    this.bookList.splice(index, 1);
     this.bookService.delete(id)
       .subscribe(() => {
         this.getAllBooks();
       });
   }
 
-  updateBook(id: number) {
+  updateBook(id: String) {
     this.router.navigate(['/updateBook', id]);
   }
 
